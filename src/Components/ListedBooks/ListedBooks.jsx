@@ -8,23 +8,47 @@ import Book from '../Book/Book';
 const ListedBooks = () => {
   const allBooks = useLoaderData();
   
-  const [readBooks,setReadBooks]=useState([])
+  const [readBooks, setReadBooks] = useState([])
+  const [sort, setSort] = useState('');
   useEffect(() => {
     const readList = getStoredList();
     const readListInt = readList.map(id => parseInt(id));
     const readBookList = allBooks.filter(book => readListInt.includes(book.bookId));
     setReadBooks(readBookList);
 
-    console.log(readList,allBooks);
+    console.log(readList, allBooks);
     
 
 
-  },[])
+  }, []);
+  const handleSort = sortType => {
+    setSort(sortType);
+    if (sortType === 'sort by pages') {
+      const readSortList = [...readBooks].sort((a, b) => b.totalPages - a.totalPages)
+      setReadBooks(readSortList);
+    } else {
+      const readWishList = [...readBooks].sort((a, b) => b.rating - a.rating);
+      setReadBooks(readWishList);
+    }
+  }
 
   return (
     <div>
       <h2 className="text-3xl font-bold my-8"> From LIstedBooks.jsx</h2>
 
+      <div className='flex items-center justify-center'>
+         <details className="dropdown">
+  <summary className="btn m-1">Sort By</summary>
+  <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+              {
+                sort?`sort By: ${sort}`: 'sort By'
+            }
+            <li onClick={()=>handleSort('sort by pages')}><a>
+            Sort By pages</a></li>
+            <li onClick={()=>handleSort('sort by ratings')}><a>Sort By ratings</a></li>
+  </ul>
+</details>
+     </div>
         <Tabs>
     <TabList>
       <Tab>Read List</Tab>

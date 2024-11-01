@@ -25,7 +25,10 @@ const Book = ({ book }) => {
 
           <button className="btn btn-sm">{category} </button>
 
-
+            <div>
+              <p>Page: {totalPages}</p>
+              <p> Rating: { rating}</p>
+</div>
           <button className="btn btn-sm">
             <div className="rating">
             <input type="radio" name="rating-4" className="mask mask-star-2 bg-green-500" />
