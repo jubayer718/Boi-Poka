@@ -11,11 +11,11 @@ const Book = ({ book }) => {
           src={image}
           alt={bookName} />
       </figure>
-      <div className="card-body">
+      <div className=" py-3 space-y-4">
         <div className='flex justify-center gap-3'>
           {tags.map((tg,index) => <button key={index} className="btn btn-xs bg-green-100 text-green-500">{tg} </button>)}
         </div>
-        <h2 className="card-title ">{bookName}</h2>
+        <h2 className="text-lg font-bold text-nowrap">{bookName}</h2>
         <p className=' '>By: {author} </p>
 
         <div className="border-t-2 border-dashed">
